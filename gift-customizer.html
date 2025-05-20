@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>礼物 DIY 定制</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { padding-top: 30px; }
+        .preview-box {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="mb-4">DIY 礼物定制</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <form id="diy-form">
+                <h4>1. T 恤定制</h4>
+                <div class="mb-3">
+                    <label class="form-label" for="shirtColor">T 恤颜色</label>
+                    <input type="color" id="shirtColor" class="form-control form-control-color" value="#ffffff">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="printText">印花文字</label>
+                    <input type="text" id="printText" class="form-control" placeholder="输入印花文字">
+                </div>
+                <h4 class="mt-4">2. 香水定制</h4>
+                <div class="mb-3">
+                    <label class="form-label" for="scent">选择香味</label>
+                    <select id="scent" class="form-select">
+                        <option value="花香">花香</option>
+                        <option value="果香">果香</option>
+                        <option value="木质香">木质香</option>
+                        <option value="东方香">东方香</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary" id="generateBtn">生成定制方案</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h4>生成结果</h4>
+            <div class="preview-box" id="preview"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+// 模拟调用大模型接口生成定制方案
+async function generatePlan(data) {
+    // 这里应调用实际的大模型 API，将用户需求发送并获取整理后的结果
+    // 本示例仅返回固定内容作为示范
+    return `定制的 T 恤颜色为 ${data.shirtColor}，印花内容为 “${data.printText}”。香水选择了 ${data.scent} 调。`;
+}
+
+document.getElementById('generateBtn').addEventListener('click', async () => {
+    const formData = {
+        shirtColor: document.getElementById('shirtColor').value,
+        printText: document.getElementById('printText').value || '自定义印花',
+        scent: document.getElementById('scent').value
+    };
+
+    // 调用大模型整理需求
+    const result = await generatePlan(formData);
+    document.getElementById('preview').textContent = result;
+});
+</script>
+</body>
+</html>
